@@ -1,0 +1,1 @@
+# listerEquipementsPRTG.ps1
