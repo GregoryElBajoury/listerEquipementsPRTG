@@ -22,7 +22,7 @@
 param(
     [string]$PRTGServer = "https://prtg.ga.fr", # URL du serveur PRTG
     [string]$UserName = "votreUser",            # Nom d'utilisateur pour accéder à l'API PRTG
-    [string]$Passhash = "votrePasshas"           # Hash de mot de passe pour l'authentification API
+    [string]$Passhash = "votrePasshash"         # Hash de mot de passe pour l'authentification API
 )
 
 # Fonction pour récupérer les appareils depuis l'API PRTG
@@ -91,7 +91,7 @@ function Main {
     # Confirmation de l'exportation réussie
     Write-Host "La liste des equipements a ete exportee avec succes vers $OutputFile"
 
-    # Ouverture du fichier CSV dans Excel
+    # Ouverture du fichier CSV dans Excel (a decommenter pour activer)
     # Start-Process -FilePath $OutputFile
 }
 
