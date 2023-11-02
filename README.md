@@ -1,4 +1,3 @@
-
 # README pour le Script d'Exportation PRTG
 ### Gregory EL BAJOURY | 02/11/2023
 ## Description
@@ -25,3 +24,17 @@ Pour exécuter le script :
    ```powershell
    .\listerEquipementsPRTG.ps1
    ````
+
+   Remplacez NomDuScript.ps1 par le nom de fichier de votre script.
+
+Le script va générer un fichier CSV dans le répertoire personnel de l'utilisateur ($HOME) avec la date et l'heure actuelles comme partie du nom de fichier.
+
+## Sortie
+Le fichier CSV généré contiendra les colonnes suivantes :
+
+- `ID Appareil` ;
+- `Appareil` ;
+- `Groupe` ;
+- `Hôte` ;
+
+  
