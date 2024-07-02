@@ -18,11 +18,11 @@
 #       \::::::/    /             |::|   |                 \::::/    /              \::::/    /                            
 #        \::::/    /              \::|   |                  \::/____/                \::/____/                             
 #         \::/____/                \:|   |                   ~~                       ~~
-# Paramètres de connexion au serveur PRTG
 param(
     [string]$PRTGServer = "https://prtg.ga.fr", # URL du serveur PRTG
-    [string]$UserName = "votreUser",            # Nom d'utilisateur pour accéder à l'API PRTG
-    [string]$Passhash = "votrePasshash"         # Hash de mot de passe pour l'authentification API
+    [string]$UserName = "user1703",            # Nom d'utilisateur pour accéder à l'API PRTG
+    [string]$Passhash = "2630274852",         # Hash de mot de passe pour l'authentification API
+    [string]$OutputFilePath = "$HOME\PRTG-Export.csv" # Chemin du fichier CSV de sortie
 )
 
 # Fonction pour récupérer les appareils depuis l'API PRTG
@@ -43,11 +43,10 @@ function Get-PRTGDevices {
         return $Response.devices | Sort-Object device
     } catch {
         # Gestion des erreurs lors de l'appel API
-        Write-Error "Erreur lors de l'appel API a PRTG : $_"
-        exit
+        Write-Error "Erreur lors de l'appel API à PRTG : $_"
+        return $null
     }
 }
-
 
 # Fonction pour exporter les appareils vers un fichier CSV
 function Export-DevicesToCSV {
@@ -55,6 +54,11 @@ function Export-DevicesToCSV {
         [Array]$Devices,        # Liste des appareils à exporter
         [string]$OutputFilePath # Chemin du fichier CSV de sortie
     )
+
+    if ($null -eq $Devices) {
+        Write-Error "Aucun appareil à exporter."
+        return
+    }
     
     # Exportation des appareils vers un fichier CSV
     $Devices | ForEach-Object {
@@ -72,29 +76,31 @@ function Export-DevicesToCSV {
 function Main {
     # Format de la date au format jour-mois-année et ajout de l'heure au format heure-minutes
     $DateTimeFormat = (Get-Date -Format "dd-MM-yyyy-HHmm")
-    # Construction du nom de fichier avec la date et l'heure
-    $OutputFile = "$HOME\PRTG-Export-$DateTimeFormat.csv"
-
+    
     # Vérification de la présence de tous les paramètres requis
-    if (-not $PRTGServer -or -not $UserName -or -not $Passhash -or -not $OutputFile) {
-        Write-Host "Tous les parametres sont obligatoires." -ForegroundColor Red
+    if (-not $PRTGServer -or -not $UserName -or -not $Passhash) {
+        Write-Host "Tous les paramètres sont obligatoires." -ForegroundColor Red
         return
     }
 
     # Début du processus d'extraction
-    Write-Host "Debut de l'extraction de la liste des equipements de PRTG..."
+    Write-Host "Début de l'extraction de la liste des équipements de PRTG..."
     # Récupération des appareils depuis PRTG
     $Devices = Get-PRTGDevices -Server $PRTGServer -Username $UserName -Passhash $Passhash
-    # Exportation des appareils vers un fichier CSV
-    Export-DevicesToCSV -Devices $Devices -OutputFilePath $OutputFile
-
-    # Confirmation de l'exportation réussie
-    Write-Host "La liste des equipements a ete exportee avec succes vers $OutputFile"
-
-    # Ouverture du fichier CSV dans Excel (a decommenter pour activer)
-    # Start-Process -FilePath $OutputFile
+    # Vérification si la récupération a réussi
+    if ($Devices -ne $null) {
+        # Ajout de la date et de l'heure au fichier de sortie
+        $OutputFilePath = "$OutputFilePath-$DateTimeFormat.csv"
+        # Exportation des appareils vers un fichier CSV
+        Export-DevicesToCSV -Devices $Devices -OutputFilePath $OutputFilePath
+        # Confirmation de l'exportation réussie
+        Write-Host "La liste des équipements a été exportée avec succès vers $OutputFilePath"
+        # Ouverture du fichier CSV dans Excel (à décommenter pour activer)
+        # Start-Process -FilePath $OutputFilePath
+    } else {
+        Write-Error "Échec de la récupération des équipements depuis PRTG."
+    }
 }
 
 # Exécution du script
 Main
-
