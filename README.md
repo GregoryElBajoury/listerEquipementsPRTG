@@ -25,16 +25,12 @@ Pour exécuter le script :
    .\listerEquipementsPRTG.ps1
    ````
 
-   Remplacez NomDuScript.ps1 par le nom de fichier de votre script.
+   Remplacez listerEquipementsPRTG.ps1 par le nom de fichier de votre script.
 
 Le script va générer un fichier CSV dans le répertoire personnel de l'utilisateur ($HOME) avec la date et l'heure actuelles comme partie du nom de fichier.
 
-## Sortie
-Le fichier CSV généré contiendra les colonnes suivantes :
-
-- `ID Appareil` ;
-- `Appareil` ;
-- `Groupe` ;
-- `Hôte` ;
-
-  
+## Paramètres
+`PRTGServer`: L'URL de votre serveur PRTG (ex : "https://prtg.example.com").
+`UserName`: Le nom d'utilisateur pour accéder à l'API PRTG.
+`Passhash`: Le hash de mot de passe pour l'authentification API.
+`OutputFilePath`: Chemin de base pour le fichier CSV de sortie (sans extension).
