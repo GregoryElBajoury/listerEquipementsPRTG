@@ -19,9 +19,9 @@
 #        \::::/    /              \::|   |                  \::/____/                \::/____/                             
 #         \::/____/                \:|   |                   ~~                       ~~
 param(
-    [string]$PRTGServer = "https://prtg.ga.fr", # URL du serveur PRTG
-    [string]$UserName = "user1703",            # Nom d'utilisateur pour accéder à l'API PRTG
-    [string]$Passhash = "2630274852",         # Hash de mot de passe pour l'authentification API
+    [string]$PRTGServer = "https://votreServeurPrtg", # URL du serveur PRTG
+    [string]$UserName = "votreUtilisateur",            # Nom d'utilisateur pour accéder à l'API PRTG
+    [string]$Passhash = "votrePassHash",         # Hash de mot de passe pour l'authentification API
     [string]$OutputFilePath = "$HOME\PRTG-Export.csv" # Chemin du fichier CSV de sortie
 )
 
