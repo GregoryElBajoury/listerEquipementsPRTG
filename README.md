@@ -31,6 +31,9 @@ Le script va générer un fichier CSV dans le répertoire personnel de l'utilisa
 
 ## Paramètres
 `PRTGServer`: L'URL de votre serveur PRTG (ex : "https://prtg.example.com").
+
 `UserName`: Le nom d'utilisateur pour accéder à l'API PRTG.
+
 `Passhash`: Le hash de mot de passe pour l'authentification API.
+
 `OutputFilePath`: Chemin de base pour le fichier CSV de sortie (sans extension).
