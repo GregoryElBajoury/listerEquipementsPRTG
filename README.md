@@ -21,9 +21,9 @@ Pour exécuter le script :
 1. Ouvrez PowerShell.
 2. Naviguez jusqu'au répertoire contenant le script.
 3. Exécutez le script : 
-   ```powershell
-   .\listerEquipementsPRTG.ps1
-   ````
+```powershell
+.\listerEquipementsPRTG.ps1
+````
 
 Remplacez listerEquipementsPRTG.ps1 par le nom de fichier de votre script.
 
